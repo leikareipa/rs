@@ -1,0 +1,45 @@
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    --text-color: black;
+    --border-color: lightgray;
+    --background-color: white;
+    --hover-highlight-color: rgba(0, 0, 0, 0.03);
+}
+
+body {
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+#rs-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+#control-panel {
+    width: 450px;
+    border-left: 1px solid var(--border-color);
+}
+
+#control-panel .mutation {
+    display: block;
+    padding: 9px;
+    border-bottom: 1px solid var(--border-color);
+    border-radius: 0 0 5px 5px;
+    user-select: none;
+}
+
+#control-panel .mutation:hover {
+    background-color: var(--hover-highlight-color);
+}
