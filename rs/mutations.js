@@ -6,14 +6,267 @@
  */
 
 export default {
-    "Disable car speed limiter": {
-        payload: ["byteset rallye.exe 97482 24"],
+    "Nitro boost": {
+        payload: [
+            "byte rallye.exe 97482 13"
+        ],
+        tooltip: "Increase the maximum speed of the player's car.",
         author: "Tarpeeksi Hyvae Soft",
-        id: "155f452c-3ad4-41b9-8e7d-681cc5590ff7",
+        id: "681cc5590ff7",
     },
-    "Tiny cars": {
-        payload: ["byteset rallye.exe 1330 0"],
+
+    "Rocket boost": {
+        payload: [
+            "byte rallye.exe 97482 18"
+        ],
+        tooltip: "Increase the maximum speed of the player's car to a ridiculous level.",
         author: "Tarpeeksi Hyvae Soft",
-        id: "9e86017e-ab3d-4f9a-bda7-359df72246af",
+        id: "956db4084d1e",
+    },
+
+    "RC cars": {
+        payload: [
+            // Offset 28879 is the start of a routine to scale car meshes. We'll put
+            // a RET instruction there to prevent the meshes from being scaled, which
+            // leads to the cars being quite small.
+            "byte rallye.exe 28879 195",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "359df72246af",
+    },
+
+    "Huge cars": {
+        payload: [
+            // These offsets are scalars in a routine to scale car meshes. We're setting
+            // them to a larger-than-default value.
+            "byte rallye.exe 28889 42",
+            "byte rallye.exe 28943 42",
+            "byte rallye.exe 28988 42",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "b4b10bd71f3b",
+    },
+
+    "Invisible cars": {
+        payload: [
+            // These offsets are scalars in a routine to scale car meshes. We're setting
+            // them to a larger-than-default value.
+            "byte rallye.exe 28889 0",
+            "byte rallye.exe 28943 0",
+            "byte rallye.exe 28988 0",
+
+            // Disable dirt kickup.
+            "byte rallye.exe 14557 195",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "79a438e0a7c4",
+    },
+
+    "Quicker starting lights": {
+        payload: [
+            "byte rallye.exe 82253 82",
+        ],
+        tooltip: "The starting lights at the beginning of a race will go out faster.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "6cc701e155d4",
+    },
+
+    "No dirt kickup": {
+        payload: [
+            // Offset 14557 is the start of a routine dealing with dirt kickup; we'll
+            // just put a RET instruction there to ignore the whole routine.
+            "byte rallye.exe 14557 195",
+        ],
+        tooltip: "Wheels won't produce kickup when driving over non-tarmac terrain.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "c4af080d98fb",
+    },
+
+    "Invulnerable spectators": {
+        payload: [
+            // Put a RET instruction at the start of a routine that gets called to deal
+            // with cars driving over spectators.
+            "byte rallye.exe 16134 195",
+        ],
+        tooltip: "Spectators won't fall down or scream when run over.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "a6f3156e0334",
+    },
+
+    "No spectator screams": {
+        payload: [
+            // Use NOP instructions to blank out a call to a routine that plays a scream
+            // sound when a spectator is run over.
+            "byte rallye.exe 16153 144",
+            "byte rallye.exe 16154 144",
+            "byte rallye.exe 16155 144",
+        ],
+        tooltip: "Spectators won't scream when run over.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "28cc36f6060c",
+    },
+
+    "No spectator animations": {
+        payload: [
+            "byte rallye.exe 18944 235",
+        ],
+        tooltip: "Spectators will stand still.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "4ba57208440c",
+    },
+
+    "Hovercars": {
+        payload: [
+            // Move the car up into the air.
+            "byte rallye.exe 15507 150",
+
+            // Disable slowing the car on non-road terrain, like grass (water will still slow it though).
+            "byte rallye.exe 16549 235",
+
+            // Disable wheel dirt kickup.
+            "byte rallye.exe 14557 195",
+        ],
+        tooltip: "Cars will hover above ground.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "d5fe96ef8ce5",
+    },
+
+    "Low-resolution ground textures": {
+        payload: [
+            "byte rallye.exe 98228 6",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "ab94a4787afd",
+    },
+
+    "Solid-colored ground textures": {
+        payload: [
+            "byte rallye.exe 98228 0",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "67ab7e0266c7",
+    },
+
+    "Small opponent": {
+        payload: [
+            // Disable a call to a car-resizing routine for the CPU opponent's car mesh.
+            "byte rallye.exe 1341 144",
+            "byte rallye.exe 1342 144",
+            "byte rallye.exe 1343 144",
+        ],
+        tooltip: "The CPU opponent will drive a small car.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "be6e731d9d42",
+    },
+
+    "Gravity: Moon": {
+        payload: [
+            "byte rallye.exe 14183 10",
+        ],
+        tooltip: "Very low gravity.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "bd99af5f3c83",
+    },
+
+    "Gravity: Sun": {
+        payload: [
+            "byte rallye.exe 14184 0",
+        ],
+        tooltip: "Very high gravity.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "cedb3f3ae872",
+    },
+
+    "No ground fog": {
+        payload: [
+            "byte rallye.exe 18314 0",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "e12a349f32e8",
+    },
+
+    "Low camera": {
+        payload: [
+            "byte rallye.exe 98061 255",
+            "byte rallye.exe 98062 1",
+
+            // Reduce the Y extent of screen repaint, since the bottom of the screen
+            // just contains garbage pixels.
+            "byte rallye.exe 17836 53",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "d31072931f2d",
+    },
+
+    "High camera": {
+        payload: [
+            "byte rallye.exe 98061 255",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "3f613c76248d",
+    },
+
+    "Darker ground shadows": {
+        payload: [
+            "byte rallye.exe 84957 0",
+            "byte rallye.exe 84958 0",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "c8e1b67b4d48",
+    },
+
+    "Levitation": {
+        payload: [
+            "byte rallye.exe 13056 255",
+        ],
+        tooltip: "The car will levitate after a jump.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "a4c4ce0989f4",
+    },
+
+    "Survivable car flips": {
+        payload: [
+            "byte rallye.exe 14153 50",
+        ],
+        tooltip: "Allows the car to do a 360-degree flip without breaking.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "c3fb1d415b45",
+    },
+
+    "Aqualung": {
+        payload: [
+            "byte rallye.exe 16427 144",
+            "byte rallye.exe 16428 144",
+            "byte rallye.exe 16429 144",
+            "byte rallye.exe 16430 144",
+        ],
+        tooltip: "Allows the car to drive underwater indefinitely without breaking.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "d4d7ea664281",
+    },
+
+    "Slo-mo": {
+        payload: [
+            "byte rallye.exe 1612 255",
+        ],
+        tooltip: "Slows down game time.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "b83890bed10d",
+    },
+
+    "No car shadows": {
+        payload: [
+            // Player's car (we blank out a call to a shadow-drawing routine).
+            "byte rallye.exe 1810 144",
+            "byte rallye.exe 1811 144",
+            "byte rallye.exe 1812 144",
+
+            // CPU's car.
+            "byte rallye.exe 5195 144",
+            "byte rallye.exe 5196 144",
+            "byte rallye.exe 5197 144",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "01348d8f5152",
     },
 }
