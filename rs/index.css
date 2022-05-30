@@ -4,9 +4,10 @@ html {
 }
 
 body {
+    --text-size: 100%;
     --text-color: black;
     --border-color: lightgray;
-    --background-color: white;
+    --background-color: #ffffff;
     --hover-highlight-color: rgba(0, 0, 0, 0.03);
 }
 
@@ -19,6 +20,15 @@ body {
     display: flex;
     color: var(--text-color);
     background-color: var(--background-color);
+    font-size: var(--text-size);
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 #rs-iframe {
@@ -28,18 +38,51 @@ body {
 }
 
 #control-panel {
-    width: 450px;
-    border-left: 1px solid var(--border-color);
+    width: 560px;
+    padding: 15px;
+    overflow-y: auto;
+    border-left: 1px solid black;
 }
 
 #control-panel .mutation {
     display: block;
-    padding: 9px;
-    border-bottom: 1px solid var(--border-color);
-    border-radius: 0 0 5px 5px;
+    padding: 10px 0;
     user-select: none;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+#control-panel .mutation > input {
+    margin-right: 0.5em;
 }
 
 #control-panel .mutation:hover {
     background-color: var(--hover-highlight-color);
+}
+
+#control-panel #search-container {
+    display: flex;
+    height: 2.5em;
+    border-bottom: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+#control-panel #search-container:hover,
+#control-panel #search-container:focus {
+    border-color: gray;
+}
+
+#control-panel #search-container input {
+    flex: 1;
+    appearance: none;
+    border: none;
+    padding: 10px;
+    outline: none;
+    font-size: inherit;
+    color: var(--text-color);
+}
+
+#control-panel hr {
+    border: none;
+    margin: 10px 0;
 }
