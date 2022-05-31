@@ -84,7 +84,7 @@ function get_rs_dosbox_url(runCommands = "") {
         ? "http://localhost:8000/dosbox"
         : "https://www.tarpeeksihyvaesoft.com/dosbox";
 
-    return `${thsDosboxBaseUrl}/?run=[${runCommands},'rally.bat']#/rally-sport/rs/`;
+    return `${thsDosboxBaseUrl}/?run=['del RALLYE.EXE','copy RALLYE.ORG RALLYE.EXE',${runCommands},'rally.bat']#/rally-sport/rs/`;
 }
 
 // Updates the 'src' attribute of the iframe in which we run Rally-Sport, debouncing
