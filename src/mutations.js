@@ -35,7 +35,7 @@ export default {
         id: "359df72246af",
     },
 
-    "Huge cars": {
+    "Big cars": {
         payload: [
             // These offsets are scalars in a routine to scale car meshes. We're setting
             // them to a larger-than-default value.
@@ -380,5 +380,47 @@ export default {
         ],
         author: "Tarpeeksi Hyvae Soft",
         id: "f3597cb9a42f",
+    },
+
+    "Everything is grass": {
+        payload: [
+            // The original code moves the proper ground texture id into AL. Instead,
+            // we'll populate AL with a fixed texture id value.
+            "byte rallye.exe 18284 176",
+            "byte rallye.exe 18285 1",
+            "byte rallye.exe 18286 144",
+        ],
+        tooltip: "All ground tiles will be rendered with the grass texture.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "df11350e8fb2",
+    },
+
+    "Everything is a void": {
+        payload: [
+            "byte rallye.exe 18284 176",
+            "byte rallye.exe 18285 255",
+            "byte rallye.exe 18286 144",
+        ],
+        tooltip: "All ground tiles will be rendered with a void texture. Game crashes can be expected.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "b1cfdba6489e",
+    },
+
+    "Winter palette": {
+        payload: [
+            // Apply to RALLYE.EXE the winter palette stored in PWINTER.EXE (see https://github.com/leikareipa/rallysported-setpal).
+            "pwinter p 0",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "761ea0e47d10",
+    },
+
+    "Monochrome palette": {
+        payload: [
+            // Apply to RALLYE.EXE the monochrome palette stored in PMONO.EXE (see https://github.com/leikareipa/rallysported-setpal).
+            "pmono p 0",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "50c03016f341",
     },
 }
