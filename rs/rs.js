@@ -14,20 +14,19 @@ console.assert = function(condition, errorMessage = "") {
 }
 
 const controlPanelEl = document.querySelector("#control-panel");
-console.assert(controlPanelEl);
-
 const mutationContainerEl = controlPanelEl.querySelector("#mutation-container");
-console.assert(mutationContainerEl);
-
+const selectionCountEl = mutationContainerEl.querySelector("#mutation-selection-count-indicator");
 const searchEl = controlPanelEl.querySelector("#search");
-console.assert(searchEl);
-
 const frameEl = document.querySelector("#rs-iframe");
-console.assert(frameEl);
+console.assert(
+    controlPanelEl &&
+    mutationContainerEl &&
+    selectionCountEl &&
+    searchEl &&
+    frameEl
+);
 
-searchEl.oninput = (event)=>update_mutation_search(event.target.value);
-frameEl.src = rs_dosbox_url();
-
+// Build the UI's list of available mutations.
 for (const [title, mutation] of Object.entries(mutations).sort()) {
     console.assert(
         (typeof mutation === "object") &&
@@ -38,9 +37,9 @@ for (const [title, mutation] of Object.entries(mutations).sort()) {
 
     const checkboxEl = document.createElement("input");
     checkboxEl.setAttribute("type", "checkbox");
-    checkboxEl.setAttribute("value", mutation.payload.map(element=>`'${element}'`));
+    checkboxEl.setAttribute("value", mutation.payload.map(element=>`'${element}'`).join(","));
+    checkboxEl.onchange = on_mutation_selection_changed;
     checkboxEl.dataset.mutationId = mutation.id;
-    checkboxEl.onchange = on_selection_changed;
 
     const labelEl = document.createElement("label");
     labelEl.setAttribute("class", "mutation");
@@ -50,47 +49,75 @@ for (const [title, mutation] of Object.entries(mutations).sort()) {
     mutationContainerEl.append(labelEl);
 }
 
-// Restore persistent selection of mutations, if any.
+// Initialize the UI state.
+frameEl.src = get_rs_dosbox_url();
+searchEl.oninput = (event)=>update_mutation_search(event.target.value);
+update_mutation_selection_count_label(0);
+
+// Restore the previous, persistent selection of mutations, if any.
 {
     const persistentSelection = localStorage.getItem("rs:mutation-selection").split(",");
+
     if (persistentSelection.length) {
-        const mutationEls = Array.from(controlPanelEl.querySelectorAll("input[type='checkbox']"));
-        mutationEls.filter(el=>persistentSelection.includes(el.dataset.mutationId)).forEach(el=>{el.checked = true; el.onchange()});
+        const allMutationEls = Array.from(mutationContainerEl.querySelectorAll("input[type='checkbox']"));
+        allMutationEls.filter(el=>persistentSelection.includes(el.dataset.mutationId)).forEach(el=>{el.checked = true; el.onchange()});
     }
 }
 
-function on_selection_changed() {
-    const selectedMutations = Array.from(controlPanelEl.querySelectorAll("input[type='checkbox']:checked"));
-    update_iframe_src(rs_dosbox_url(selectedMutations.map(m=>m.value)));
-    localStorage.setItem("rs:mutation-selection", selectedMutations.map(el=>el.dataset.mutationId).join(","));
+// Gets called when a mutation's checkbox in the UI is toggled.
+function on_mutation_selection_changed() {
+    const selectedMutations = Array.from(mutationContainerEl.querySelectorAll("input[type='checkbox']:checked"));
+    const selectedMutationsIdList = selectedMutations.map(el=>el.dataset.mutationId);
+    const mutationRunCommands = selectedMutations.map(m=>m.value).join(",");
+    debounced_update_rs_iframe_src(get_rs_dosbox_url(mutationRunCommands));
+    update_mutation_selection_count_label(selectedMutations.length);
+    localStorage.setItem("rs:mutation-selection", selectedMutationsIdList.join(","));
 }
 
-function rs_dosbox_url(commands = []) {
-    console.assert(Array.isArray(commands));
-    commands.push("'rally.bat'");
-    return `http://localhost:8000/dosbox/?run=[${commands.join(",")}]#/rally-sport/rs/`;
+// Returns a URL to a ths-web-dosbox (cf. github.com/leikareipa/ths-web-dosbox)
+// client that provides our in-browser Rally-Sport experience, inserting into it the
+// given run commands from rs.
+function get_rs_dosbox_url(runCommands = "") {
+    console.assert(typeof runCommands === "string");
+
+    const thsDosboxBaseUrl = (window.location.hostname === "localhost")
+        ? "http://localhost:8000/dosbox"
+        : "https://www.tarpeeksihyvaesoft.com/dosbox";
+
+    return `${thsDosboxBaseUrl}/?run=[${runCommands},'rally.bat']#/rally-sport/rs/`;
 }
 
-function update_iframe_src(newUrl = "") {
+// Updates the 'src' attribute of the iframe in which we run Rally-Sport, debouncing
+// it so that multiple calls to this function within a brief delay period results in
+// the attribute being changed only once.
+function debounced_update_rs_iframe_src(newUrl = "") {
     console.assert(typeof newUrl === "string");
 
-    if (update_iframe_src.debounce !== undefined) {
-        clearTimeout(update_iframe_src.debounce);
+    if (debounced_update_rs_iframe_src.debounce !== undefined) {
+        clearTimeout(debounced_update_rs_iframe_src.debounce);
     }
 
-    update_iframe_src.debounce = setTimeout(()=>{
+    debounced_update_rs_iframe_src.debounce = setTimeout(()=>{
         frameEl.focus();
         frameEl.src = newUrl;
-        update_iframe_src.debounce = undefined;
+        debounced_update_rs_iframe_src.debounce = undefined;
     }, 500);
 }
 
 function update_mutation_search(query = "") {
     console.assert(typeof query === "string");
+
     query = query.trim().toLowerCase();
-    const mutationEls = Array.from(controlPanelEl.querySelectorAll("input[type='checkbox']")).map(el=>el.parentElement);
-    const matchingMutationEls = mutationEls.filter(el=>el.textContent.toLowerCase().includes(query));
-    mutationEls.forEach(el=>el.style.display = "none");
+    
+    const allMutationEls = Array.from(mutationContainerEl.querySelectorAll("input[type='checkbox']")).map(el=>el.parentElement);
+    const matchingMutationEls = allMutationEls.filter(el=>el.textContent.toLowerCase().includes(query));
+
+    allMutationEls.forEach(el=>el.style.display = "none");
     matchingMutationEls.forEach(el=>el.style.display = "block");
     mutationContainerEl.classList[matchingMutationEls.length? "remove" : "add"]("empty");
+}
+
+function update_mutation_selection_count_label(numMutationsSelected = 0) {
+    console.assert(typeof numMutationsSelected === "number");
+    selectionCountEl.textContent = `${numMutationsSelected}/${Object.keys(mutations).length} mutations selected`;
 }

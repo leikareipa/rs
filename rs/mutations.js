@@ -62,7 +62,7 @@ export default {
         id: "79a438e0a7c4",
     },
 
-    "Fast starting lights": {
+    "Reduce starting delay": {
         payload: [
             "byte rallye.exe 82253 82",
         ],
@@ -115,7 +115,7 @@ export default {
         id: "4ba57208440c",
     },
 
-    "Hovercars": {
+    "Hovering cars": {
         payload: [
             // Move the car up into the air.
             "byte rallye.exe 15507 150",
@@ -185,7 +185,7 @@ export default {
         id: "e12a349f32e8",
     },
 
-    "Lower the camera": {
+    "Low camera angle": {
         payload: [
             "byte rallye.exe 98061 255",
             "byte rallye.exe 98062 1",
@@ -198,7 +198,7 @@ export default {
         id: "d31072931f2d",
     },
 
-    "Raise the camera": {
+    "High camera angle": {
         payload: [
             "byte rallye.exe 98061 255",
         ],
@@ -215,7 +215,7 @@ export default {
         id: "c8e1b67b4d48",
     },
 
-    "Levitation": {
+    "Levitate after jumping": {
         payload: [
             "byte rallye.exe 13056 255",
         ],
@@ -224,11 +224,11 @@ export default {
         id: "a4c4ce0989f4",
     },
 
-    "Survivable car flips": {
+    "Flipping car": {
         payload: [
             "byte rallye.exe 14153 50",
         ],
-        tooltip: "Allows the car to do a 360-degree flip without breaking.",
+        tooltip: "Allows the car to do 360-degree flips without breaking.",
         author: "Tarpeeksi Hyvae Soft",
         id: "c3fb1d415b45",
     },
@@ -300,7 +300,85 @@ export default {
             "byte rallye.exe 15115 235",
             "byte rallye.exe 15158 235",
         ],
+        tooltip: "The checkered flag will wave on the screen all the time.",
         author: "Tarpeeksi Hyvae Soft",
         id: "2fc0f0d957df",
+    },
+
+    "PC beeper sounds": {
+        payload: [
+            // Alter the offset for loading sound data from.
+            "byte rallye.exe 631 0",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "440cc9da66b7",
+    },
+
+    "Strange landscapes": {
+        payload: [
+            // Alter the offset for loading texture data from.
+            "byte rallye.exe 621 5",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "87a1c5d8957b",
+    },
+
+    "Kraftwerk car sounds": {
+        payload: [
+            // Player's car.
+            "byte rallye.exe 31972 5",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "8bcc6bde21fb",
+    },
+
+    "Retro tint": {
+        payload: [
+            "byte rallye.exe 17793 144",
+            "byte rallye.exe 17794 144",
+        ],
+        tooltip: "The screen's colors will take on a retro vibe.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "8b622ce0d334",
+    },
+
+    "Fat cars": {
+        payload: [
+            "byte rallye.exe 28902 2",
+            "byte rallye.exe 28954 2",
+            "byte rallye.exe 28999 2",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "4f257c0d8f3e",
+    },
+
+    "Thin cars": {
+        payload: [
+            "byte rallye.exe 28902 5",
+            "byte rallye.exe 28954 5",
+            "byte rallye.exe 28999 5",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "44c009d9425e",
+    },
+
+    "Paper cutout cars": {
+        payload: [
+            "byte rallye.exe 28902 50",
+            "byte rallye.exe 28954 50",
+            "byte rallye.exe 28999 50",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "f8b5b4dfb5f5",
+    },
+
+    "Tall cars": {
+        payload: [
+            "byte rallye.exe 28912 2",
+            "byte rallye.exe 28964 2",
+            "byte rallye.exe 28964 2",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "f3597cb9a42f",
     },
 }
