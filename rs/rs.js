@@ -21,7 +21,7 @@ console.assert(frameEl);
 
 frameEl.src = rs_dosbox_url();
 
-for (const [title, mutation] of Object.entries(mutations)) {
+for (const [title, mutation] of Object.entries(mutations).sort()) {
     console.assert(
         (typeof mutation === "object") &&
         (typeof mutation.id === "string") &&
