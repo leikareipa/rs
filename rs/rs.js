@@ -16,9 +16,16 @@ console.assert = function(condition, errorMessage = "") {
 const controlPanelEl = document.querySelector("#control-panel");
 console.assert(controlPanelEl);
 
+const mutationContainerEl = controlPanelEl.querySelector("#mutation-container");
+console.assert(mutationContainerEl);
+
+const searchEl = controlPanelEl.querySelector("#search");
+console.assert(searchEl);
+
 const frameEl = document.querySelector("#rs-iframe");
 console.assert(frameEl);
 
+searchEl.oninput = (event)=>update_mutation_search(event.target.value);
 frameEl.src = rs_dosbox_url();
 
 for (const [title, mutation] of Object.entries(mutations).sort()) {
@@ -39,7 +46,7 @@ for (const [title, mutation] of Object.entries(mutations).sort()) {
     labelEl.setAttribute("title", mutation.tooltip || "");
     labelEl.append(checkboxEl, document.createTextNode(title));
 
-    controlPanelEl.append(labelEl);
+    mutationContainerEl.append(labelEl);
 }
 
 function on_selection_changed() {
@@ -65,4 +72,14 @@ function update_iframe_src(newUrl = "") {
         frameEl.src = newUrl;
         update_iframe_src.debounce = undefined;
     }, 500);
+}
+
+function update_mutation_search(query = "") {
+    console.assert(typeof query === "string");
+    query = query.trim().toLowerCase();
+    const mutationEls = Array.from(controlPanelEl.querySelectorAll("input[type='checkbox']")).map(el=>el.parentElement);
+    const matchingMutationEls = mutationEls.filter(el=>el.textContent.toLowerCase().includes(query));
+    mutationEls.forEach(el=>el.style.display = "none");
+    matchingMutationEls.forEach(el=>el.style.display = "block");
+    mutationContainerEl.classList[matchingMutationEls.length? "remove" : "add"]("empty");
 }

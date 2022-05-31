@@ -60,6 +60,14 @@ a:hover {
     background-color: var(--hover-highlight-color);
 }
 
+#control-panel #mutation-container.empty::before {
+    content: "Nothing to show.";
+    font-style: italic;
+    padding: 10px;
+    display: block;
+    color: gray;
+}
+
 #control-panel #search-container {
     display: flex;
     height: 2.5em;
