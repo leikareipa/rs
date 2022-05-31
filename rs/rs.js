@@ -39,6 +39,7 @@ for (const [title, mutation] of Object.entries(mutations).sort()) {
     const checkboxEl = document.createElement("input");
     checkboxEl.setAttribute("type", "checkbox");
     checkboxEl.setAttribute("value", mutation.payload.map(element=>`'${element}'`));
+    checkboxEl.dataset.mutationId = mutation.id;
     checkboxEl.onchange = on_selection_changed;
 
     const labelEl = document.createElement("label");
@@ -49,9 +50,19 @@ for (const [title, mutation] of Object.entries(mutations).sort()) {
     mutationContainerEl.append(labelEl);
 }
 
+// Restore persistent selection of mutations, if any.
+{
+    const persistentSelection = localStorage.getItem("rs:mutation-selection").split(",");
+    if (persistentSelection.length) {
+        const mutationEls = Array.from(controlPanelEl.querySelectorAll("input[type='checkbox']"));
+        mutationEls.filter(el=>persistentSelection.includes(el.dataset.mutationId)).forEach(el=>{el.checked = true; el.onchange()});
+    }
+}
+
 function on_selection_changed() {
     const selectedMutations = Array.from(controlPanelEl.querySelectorAll("input[type='checkbox']:checked"));
     update_iframe_src(rs_dosbox_url(selectedMutations.map(m=>m.value)));
+    localStorage.setItem("rs:mutation-selection", selectedMutations.map(el=>el.dataset.mutationId).join(","));
 }
 
 function rs_dosbox_url(commands = []) {
