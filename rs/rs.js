@@ -44,12 +44,25 @@ for (const [title, mutation] of Object.entries(mutations)) {
 
 function on_selection_changed() {
     const selectedMutations = Array.from(controlPanelEl.querySelectorAll("input[type='checkbox']:checked"));
-    frameEl.focus();
-    frameEl.src = rs_dosbox_url(selectedMutations.map(m=>m.value));
+    update_iframe_src(rs_dosbox_url(selectedMutations.map(m=>m.value)));
 }
 
 function rs_dosbox_url(commands = []) {
     console.assert(Array.isArray(commands));
     commands.push("'rally.bat'");
     return `http://localhost:8000/dosbox/?run=[${commands.join(",")}]#/rally-sport/rs/`;
+}
+
+function update_iframe_src(newUrl = "") {
+    console.assert(typeof newUrl === "string");
+
+    if (update_iframe_src.debounce !== undefined) {
+        clearTimeout(update_iframe_src.debounce);
+    }
+
+    update_iframe_src.debounce = setTimeout(()=>{
+        frameEl.focus();
+        frameEl.src = newUrl;
+        update_iframe_src.debounce = undefined;
+    }, 500);
 }
