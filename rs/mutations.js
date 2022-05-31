@@ -62,7 +62,7 @@ export default {
         id: "79a438e0a7c4",
     },
 
-    "Quicker starting lights": {
+    "Fast starting lights": {
         payload: [
             "byte rallye.exe 82253 82",
         ],
@@ -159,7 +159,7 @@ export default {
         id: "be6e731d9d42",
     },
 
-    "Gravity: Moon": {
+    "Gravity: Low": {
         payload: [
             "byte rallye.exe 14183 10",
         ],
@@ -168,7 +168,7 @@ export default {
         id: "bd99af5f3c83",
     },
 
-    "Gravity: Sun": {
+    "Gravity: High": {
         payload: [
             "byte rallye.exe 14184 0",
         ],
@@ -185,7 +185,7 @@ export default {
         id: "e12a349f32e8",
     },
 
-    "Low camera": {
+    "Lower the camera": {
         payload: [
             "byte rallye.exe 98061 255",
             "byte rallye.exe 98062 1",
@@ -198,7 +198,7 @@ export default {
         id: "d31072931f2d",
     },
 
-    "High camera": {
+    "Raise the camera": {
         payload: [
             "byte rallye.exe 98061 255",
         ],
@@ -206,7 +206,7 @@ export default {
         id: "3f613c76248d",
     },
 
-    "Darker ground shadows": {
+    "Dark ground shadows": {
         payload: [
             "byte rallye.exe 84957 0",
             "byte rallye.exe 84958 0",
@@ -254,7 +254,7 @@ export default {
         id: "b83890bed10d",
     },
 
-    "No car shadows": {
+    "No car shadow": {
         payload: [
             // Player's car (we blank out a call to a shadow-drawing routine).
             "byte rallye.exe 1810 144",
@@ -268,5 +268,39 @@ export default {
         ],
         author: "Tarpeeksi Hyvae Soft",
         id: "01348d8f5152",
+    },
+
+    "No ground shading": {
+        payload: [
+            "byte rallye.exe 27874 255",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "45c0df9aa79c",
+    },
+
+    "Dark screen": {
+        payload: [
+            "byte rallye.exe 17761 54",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "a4e4e4c2d1af",
+    },
+
+    "No lap time display": {
+        payload: [
+            "byte rallye.exe 8890 195",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "aa7fe7a206ff",
+    },
+
+    "Permanent checkered flag": {
+        payload: [
+            // Bypass checks for whether the race is over.
+            "byte rallye.exe 15115 235",
+            "byte rallye.exe 15158 235",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "2fc0f0d957df",
     },
 }
