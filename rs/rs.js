@@ -56,7 +56,7 @@ function on_selection_changed() {
 
 function rs_dosbox_url(commands = []) {
     console.assert(Array.isArray(commands));
-    commands.push("'rally.bat'");
+    commands.push("'rally.bat'", "'rally.bat'"); // We push it twice because sometimes js-dos ignores the last command, no idea why.
     return `http://localhost:8000/dosbox/?run=[${commands.join(",")}]#/rally-sport/rs/`;
 }
 
