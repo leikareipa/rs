@@ -31,11 +31,12 @@ for (const [title, mutation] of Object.entries(mutations)) {
 
     const checkboxEl = document.createElement("input");
     checkboxEl.setAttribute("type", "checkbox");
-    checkboxEl.setAttribute("value", mutation.payload);
+    checkboxEl.setAttribute("value", mutation.payload.map(element=>`'${element}'`));
     checkboxEl.onchange = on_selection_changed;
 
     const labelEl = document.createElement("label");
     labelEl.setAttribute("class", "mutation");
+    labelEl.setAttribute("title", mutation.tooltip || "");
     labelEl.append(checkboxEl, document.createTextNode(title));
 
     controlPanelEl.append(labelEl);
@@ -43,12 +44,12 @@ for (const [title, mutation] of Object.entries(mutations)) {
 
 function on_selection_changed() {
     const selectedMutations = Array.from(controlPanelEl.querySelectorAll("input[type='checkbox']:checked"));
-    const combinedMutationCommands = selectedMutations.map(m=>`'${m.value}'`);
     frameEl.focus();
-    frameEl.src = rs_dosbox_url(combinedMutationCommands.join(","));
+    frameEl.src = rs_dosbox_url(selectedMutations.map(m=>m.value));
 }
 
-function rs_dosbox_url(extraCommands = "") {
-    console.assert(typeof extraCommands == "string");
-    return `http://localhost:8000/dosbox/?run=[${extraCommands},'rally.bat']#/rally-sport/rs/`;
+function rs_dosbox_url(commands = []) {
+    console.assert(Array.isArray(commands));
+    commands.push("'rally.bat'");
+    return `http://localhost:8000/dosbox/?run=[${commands.join(",")}]#/rally-sport/rs/`;
 }
