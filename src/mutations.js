@@ -254,7 +254,7 @@ export default {
         id: "b83890bed10d",
     },
 
-    "No car shadow": {
+    "No car shadows": {
         payload: [
             // Player's car (we blank out a call to a shadow-drawing routine).
             "byte rallye.exe 1810 144",
@@ -422,5 +422,34 @@ export default {
         ],
         author: "Tarpeeksi Hyvae Soft",
         id: "50c03016f341",
+    },
+
+    "Hide 3D objects": {
+        payload: [
+            "byte rallye.exe 21781 0",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "343041b25c1e",
+    },
+
+    "No damage indicator": {
+        payload: [
+            "byte rallye.exe 10055 0",
+            "byte rallye.exe 10056 0",
+            "byte rallye.exe 10057 0",
+            "byte rallye.exe 10058 0",
+        ],
+        tooltip: "Normally, when a car hits a 3D object, a white rectangle is drawn in the top left corner. This disables it.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "50e6cdea91e8",
+    },
+
+    "Collision screams and laughs": {
+        payload: [
+            "byte rallye.exe 32508 5",
+        ],
+        tooltip: "Colliding the car with anything has a chance of producing screams or laughs.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "12fbef33ab4e",
     },
 }
