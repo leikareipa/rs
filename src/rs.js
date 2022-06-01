@@ -14,6 +14,7 @@ console.assert = function(condition, errorMessage = "") {
 }
 
 const controlPanelEl = document.querySelector("#control-panel");
+const closerEl = controlPanelEl.querySelector("#closer");
 const mutationContainerEl = controlPanelEl.querySelector("#mutation-container");
 const selectionCountEl = mutationContainerEl.querySelector("#mutation-selection-count-indicator");
 const searchEl = controlPanelEl.querySelector("#search");
@@ -52,6 +53,7 @@ for (const [title, mutation] of Object.entries(mutations).sort()) {
 // Initialize the UI state.
 frameEl.src = get_rs_dosbox_url();
 searchEl.oninput = (event)=>update_mutation_search(event.target.value);
+closerEl.onclick = toggle_control_panel_expansion;
 update_mutation_selection_count_label(0);
 
 // Restore the previous, persistent selection of mutations, if any.
@@ -120,4 +122,9 @@ function update_mutation_search(query = "") {
 function update_mutation_selection_count_label(numMutationsSelected = 0) {
     console.assert(typeof numMutationsSelected === "number");
     selectionCountEl.textContent = `${numMutationsSelected}/${Object.keys(mutations).length} mutations selected`;
+}
+
+function toggle_control_panel_expansion() {
+    controlPanelEl.classList.toggle("expanded");
+    frameEl.focus();
 }

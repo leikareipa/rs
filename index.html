@@ -8,20 +8,13 @@
     </head>
     <body>
         <iframe id="rs-iframe" autofocus></iframe>
-        <main id="control-panel">
+        <main id="control-panel" class="expanded">
+            <div id="closer"></div>
             <div id="search-container">
-                <input id="search" type="search" placeholder="Filter the mutations list...">
+                <input id="search" type="search" placeholder="Search...">
             </div>
             <div id="mutation-container">
-                <div id="mutation-selection-count-indicator">
-                    x/y mutations selected
-                </div>
-            </div>
-            <div id="about">
-                <strong>About:</strong>
-                This app lets you play and corrupt Rally-Sport, the 1996 DOS racing game.
-                <a href="https://github.com/leikareipa/rs">Visit the project onGitHub</a>
-                for more info.
+                <div id="mutation-selection-count-indicator"></div>
             </div>
         </main>
         <script src="./src/rs.js" type="module"></script>
