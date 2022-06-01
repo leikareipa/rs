@@ -452,4 +452,42 @@ export default {
         author: "Tarpeeksi Hyvae Soft",
         id: "12fbef33ab4e",
     },
+
+    "Black metal sounds": {
+        payload: [
+            "byte rallye.exe 31965 10",
+        ],
+        tooltip: "Harsh audio.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "459ec4761636",
+    },
+
+    "Flashbacks (epilepsy warning)": {
+        payload: [
+            "byte rallye.exe 12193 17",
+        ],
+        tooltip: "Cars will teleport around unpredictably. Warning: may cause the screen to flash.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "f374c97e05bc",
+    },
+
+    "Confusion (epilepsy warning)": {
+        payload: [
+            "byte rallye.exe 12193 15",
+        ],
+        tooltip: "You won't quite know what's going on. Warning: may cause the screen to flash.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "4373933b4037",
+    },
+
+    "Bumper cars": {
+        payload: [
+            // Convert SAR EAX,2 to SAL EAX,1.
+            "byte rallye.exe 12422 224",
+            "byte rallye.exe 12423 1",
+        ],
+        tooltip: "Aggressive collisions between cars.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "c68d292a993a",
+    },
 }
