@@ -6,6 +6,9 @@ Paraphrasing the idea of game corruptions from [corrupt.wiki](https://corrupt.wi
 
 > The act of "corrupting games" is taking a video game and breaking it using whatever means necessary, usually with a program called a corruptor. This software can modify the game's files to produce unexpected or unusual graphics, gameplay or audio.
 
+![](./screenshots/monochrome.png)\
+*Monochrome racing.*
+
 ## Usage
 
 You can access the app live on the web at [tarpeeksihyvaesoft.com/rs](https://tarpeeksihyvaesoft.com/rs).
