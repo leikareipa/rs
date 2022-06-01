@@ -28,7 +28,7 @@ Rally-Sport's keyboard controls are as follows (I don't know whether these key b
 
 ### System requirements
 
-If you're using a modern browser with JavaScript enabled, you should be good to go.
+If you're using a modern browser with JavaScript enabled, you should be good to go. Performance might be best on Chrome.
 
 You'll need a keyboard to play the game, and in general the app expects you to be in a desktop-like computing environment.
 
@@ -60,16 +60,17 @@ The `payload` attribute defines an array of strings that will be passed as comma
 
 A mutation typically issues as its payload one or more calls to the `byte` command to modify particular bytes in the game's files (usually, its main executable, RALLYE.EXE) and so to effect the desired corruption. For example, a mutation might change the value of a hard-coded variable, or modify opcodes to influence program flow.
 
-### Contributing it
+### Making the contribution
 
 Follow these general steps:
 
 1. Fork this repo.
 2. Add your mutation to the forked [./src/mutations.js](./src/mutations.js) file.
-3. Open a pull request for the change. Describe briefly what's being corrupted and how.
+3. Open a pull request for the change. In the pull request, describe briefly what's being corrupted and how.
 
 Things to keep in mind:
 
-- Only one mutation per pull request please.
+- Try to keep it to one mutation per pull request.
 - Each mutation must have a unique `id` attribute; generally the last 12 symbols of a version 4 UUID.
 - Each mutation must have an `author` name.
+- If you're planning on mutating something other than RALLYE.EXE, first open a pull request for supporting that kind of mutation. Even though the `byte` command already allows targeting files other than RALLYE.EXE, there are other considerations - like file persistence - that I'd like to address first.
