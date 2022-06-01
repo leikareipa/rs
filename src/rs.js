@@ -51,15 +51,15 @@ for (const [title, mutation] of Object.entries(mutations).sort()) {
 }
 
 // Initialize the UI state.
-frameEl.src = get_rs_dosbox_url();
-searchEl.oninput = (event)=>update_mutation_search(event.target.value);
-closerEl.onclick = toggle_control_panel_expansion;
-update_mutation_selection_count_label(0);
-
-// Restore the previous, persistent selection of mutations, if any.
 {
-    const persistentSelection = localStorage.getItem("rs:mutation-selection").split(",");
+    frameEl.src = get_rs_dosbox_url();
+    searchEl.oninput = (event)=>update_mutation_search(event.target.value);
+    closerEl.onclick = toggle_control_panel_expansion;
+    
+    update_mutation_selection_count_label(0);
 
+    // Restore the previous, persistent selection of mutations, if any.
+    const persistentSelection = localStorage.getItem("rs:mutation-selection").split(",");
     if (persistentSelection.length) {
         const allMutationEls = Array.from(mutationContainerEl.querySelectorAll("input[type='checkbox']"));
         allMutationEls.filter(el=>persistentSelection.includes(el.dataset.mutationId)).forEach(el=>{el.checked = true; el.onchange()});
