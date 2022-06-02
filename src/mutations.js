@@ -591,8 +591,44 @@ export default {
             "byte rallye.exe 23072 3",
             "byte rallye.exe 23073 144",
         ],
-        tooltip: "Road tiles will be replaced with flower tiles.",
+        tooltip: "Road tiles will be replaced with flowery grass tiles.",
         author: "Tarpeeksi Hyvae Soft",
         id: "d30f00aae598",
+    },
+
+    "Enthusiastic spectators": {
+        payload: [
+            "byte rallye.exe 19001 0",
+        ],
+        tooltip: "Spectators will flap their arms wildly.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "c1860e01c11d",
+    },
+
+    "Disappearing spectators": {
+        payload: [
+            "byte rallye.exe 18988 209",
+            "byte rallye.exe 18989 232",
+        ],
+        tooltip: "Spectators will disappear when approached.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "0230b8c75e09",
+    },
+
+    "Invisible spectators": {
+        payload: [
+            "byte rallye.exe 18339 255",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "4d99ee202f1e",
+    },
+
+    "Moving spectators": {
+        payload: [
+            "byte rallye.exe 18741 6",
+        ],
+        tooltip: "Spectators will move around as you drive.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "918b826ca005",
     },
 }
