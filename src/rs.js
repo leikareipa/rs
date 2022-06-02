@@ -52,17 +52,29 @@ for (const [title, mutation] of Object.entries(mutations).sort()) {
 
 // Initialize the UI state.
 {
-    frameEl.src = get_rs_dosbox_url();
     searchEl.oninput = (event)=>update_mutation_search(event.target.value);
     closerEl.onclick = toggle_control_panel_expansion;
-    
+
     update_mutation_selection_count_label(0);
 
-    // Restore the previous, persistent selection of mutations, if any.
-    const persistentSelection = localStorage.getItem("rs:mutation-selection").split(",");
-    if (persistentSelection.length) {
+    // Effect the user's desired selection of mutations, either via a URL parameter or from
+    // persistent local storage, if either one is available.
+    {
         const allMutationEls = Array.from(mutationContainerEl.querySelectorAll("input[type='checkbox']"));
-        allMutationEls.filter(el=>persistentSelection.includes(el.dataset.mutationId)).forEach(el=>{el.checked = true; el.onchange()});
+        const urlParamData = new URLSearchParams(window.location.search).get("mutations");
+        const persistentSelection = localStorage.getItem("rs:mutation-selection").split(",");
+
+        if (urlParamData !== null) {
+            const mutationIds = urlParamData.split("$");
+            allMutationEls.filter(el=>mutationIds.includes(el.dataset.mutationId)).forEach(el=>{el.checked = true; el.onchange()});
+        }
+        else if (persistentSelection.length) {
+            allMutationEls.filter(el=>persistentSelection.includes(el.dataset.mutationId)).forEach(el=>{el.checked = true; el.onchange()});
+        }
+        // Otherwise, load the default, unmodified game.
+        else {
+            frameEl.src = get_rs_dosbox_url();
+        }
     }
 }
 
@@ -74,6 +86,8 @@ function on_mutation_selection_changed() {
     debounced_update_rs_iframe_src(get_rs_dosbox_url(mutationRunCommands));
     update_mutation_selection_count_label(selectedMutations.length);
     localStorage.setItem("rs:mutation-selection", selectedMutationsIdList.join(","));
+    window.history.replaceState(null, null, (selectedMutationsIdList.length? `?mutations=${selectedMutationsIdList.join("$")}` : "/"));
+
 }
 
 // Returns a URL to a ths-web-dosbox (cf. github.com/leikareipa/ths-web-dosbox)
