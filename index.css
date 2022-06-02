@@ -86,8 +86,14 @@ a:hover {
 }
 
 #control-panel #about {
-    background-color: var(--hover-highlight-color);
-    font-size: var(--small-text-size);
+    border-bottom: 1px solid var(--border-color);
+    padding: 20px 15px;
+    padding-left: 10px;
+    display: flex;
+}
+
+#control-panel #about .button.close {
+    margin-right: 1ch;
 }
 
 #control-panel .mutation {
@@ -112,6 +118,7 @@ a:hover {
     border-top: 1px solid var(--border-color);
     border-bottom: 1px solid var(--border-color);
     padding: 10px 10px;
+    padding-bottom: 20px;
 }
 
 #control-panel #mutation-container.empty::after {
@@ -152,4 +159,20 @@ a:hover {
 #control-panel hr {
     border: none;
     margin: 10px 0;
+}
+
+.button {
+    padding: 5px;
+    border-radius: 100px;
+    background-color: var(--border-color);
+    color: white;
+    cursor: pointer;
+}
+
+.button:hover {
+    color: gray;
+}
+
+.hidden {
+    display: none !important;
 }

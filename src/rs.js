@@ -14,13 +14,17 @@ console.assert = function(condition, errorMessage = "") {
 }
 
 const controlPanelEl = document.querySelector("#control-panel");
-const closerEl = controlPanelEl.querySelector("#closer");
+const controlPanelCloserEl = controlPanelEl.querySelector("#closer");
+const aboutEl = controlPanelEl.querySelector("#about");
+const dismissAboutEl = aboutEl.querySelector(".close.button");
 const mutationContainerEl = controlPanelEl.querySelector("#mutation-container");
 const selectionCountEl = mutationContainerEl.querySelector("#mutation-selection-count-indicator");
 const searchEl = controlPanelEl.querySelector("#search");
 const frameEl = document.querySelector("#rs-iframe");
 console.assert(
     controlPanelEl &&
+    controlPanelCloserEl &&
+    dismissAboutEl &&
     mutationContainerEl &&
     selectionCountEl &&
     searchEl &&
@@ -53,9 +57,14 @@ for (const [title, mutation] of Object.entries(mutations).sort()) {
 // Initialize the UI state.
 {
     searchEl.oninput = (event)=>update_mutation_search(event.target.value);
-    closerEl.onclick = toggle_control_panel_expansion;
+    controlPanelCloserEl.onclick = toggle_control_panel_expansion;
+    dismissAboutEl.onclick = hide_about_element;
 
     update_mutation_selection_count_label(0);
+
+    if (!localStorage.getItem("rs:hide-about")) {
+        aboutEl.classList.remove("hidden");
+    }
 
     // Effect the user's desired selection of mutations, either via a URL parameter or from
     // persistent local storage, if either one is available.
@@ -142,4 +151,9 @@ function update_mutation_selection_count_label(numMutationsSelected = 0) {
 function toggle_control_panel_expansion() {
     controlPanelEl.classList.toggle("expanded");
     frameEl.focus();
+}
+
+function hide_about_element() {
+    aboutEl.remove();
+    localStorage.setItem("rs:hide-about", true);
 }
