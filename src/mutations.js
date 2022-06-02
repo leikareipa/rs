@@ -490,4 +490,109 @@ export default {
         author: "Tarpeeksi Hyvae Soft",
         id: "c68d292a993a",
     },
+
+    "No car-on-car collisions": {
+        payload: [
+            // Force a RET instruction to the beginning of a car collision handling routine.
+            "byte rallye.exe 9373 195",
+        ],
+        tooltip: "The player and CPU cars can pass through one another.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "c7d29c738b7c",
+    },
+
+    "Laughing engine": {
+        payload: [
+            // Replace "sound1.wav" with "haha1.wav\0" as the source of the player's engine sound.
+            "byte rallye.exe 133123 104",
+            "byte rallye.exe 133124 97",
+            "byte rallye.exe 133125 104",
+            "byte rallye.exe 133126 97",
+            "byte rallye.exe 133127 49",
+            "byte rallye.exe 133128 46",
+            "byte rallye.exe 133129 119",
+            "byte rallye.exe 133130 97",
+            "byte rallye.exe 133131 118",
+            "byte rallye.exe 133132 0",
+        ],
+        tooltip: "The sound of the player's car engine will be replaced with that of a laughing spectator.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "f244d40c4ca7",
+    },
+
+    "Windy": {
+        payload: [
+            "byte rallye.exe 12640 144",
+            "byte rallye.exe 12641 144",
+            "byte rallye.exe 12642 144",
+            "byte rallye.exe 12643 144",
+        ],
+        tooltip: "The car's handling will be affected by windy conditions.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "58c3e2c5ca3d",
+    },
+
+    "Sparse dirt kickup": {
+        payload: [
+            "byte rallye.exe 14707 2",
+        ],
+        tooltip: "The car's wheels will kick up dirt only sporadically.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "43fd9c0c48a5",
+    },
+
+    "Replace dirt texture with water": {
+        payload: [
+            "byte rallye.exe 23068 15",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "5c13899450f8",
+    },
+
+    "Zoomed-in camera": {
+        payload: [
+            "byte rallye.exe 98277 0",
+            "byte rallye.exe 98278 3",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "ab7a8d3b25e8",
+    },
+
+    "Zoomed-out camera": {
+        payload: [
+            "byte rallye.exe 98277 0",
+            "byte rallye.exe 98278 2",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "1fa88c4eef30",
+    },
+
+    "Don't render partial ground tiles": {
+        payload: [
+            "byte rallye.exe 23559 179",
+            "byte rallye.exe 23560 0",
+            "byte rallye.exe 23561 144",
+            "byte rallye.exe 23562 144",
+        ],
+        tooltip: "Ground tiles that're partially outside of the screen will be prevented from rendering at all.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "3775de629239",
+    },
+
+    "Flowery path": {
+        payload: [
+            "byte rallye.exe 23063 38",
+            "byte rallye.exe 23066 37",
+            "byte rallye.exe 23067 0",
+            "byte rallye.exe 23068 1",
+            "byte rallye.exe 23069 117",
+            "byte rallye.exe 23070 2",
+            "byte rallye.exe 23071 180",
+            "byte rallye.exe 23072 3",
+            "byte rallye.exe 23073 144",
+        ],
+        tooltip: "Road tiles will be replaced with flower tiles.",
+        author: "Tarpeeksi Hyvae Soft",
+        id: "d30f00aae598",
+    },
 }
