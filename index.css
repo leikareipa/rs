@@ -99,6 +99,7 @@ a:hover {
     padding: 20px 15px;
     padding-left: 10px;
     display: flex;
+    font-size: var(--small-text-size);
 }
 
 #control-panel #about .button.close {
@@ -171,7 +172,7 @@ a:hover {
 }
 
 .button {
-    padding: 5px;
+    padding: 3px;
     border-radius: 3px;
     background-color: var(--border-color);
     color: white;

@@ -18,7 +18,7 @@ const controlPanelCloserEl = document.querySelector("#control-panel-closer");
 const aboutEl = controlPanelEl.querySelector("#about");
 const dismissAboutEl = aboutEl.querySelector(".close.button");
 const mutationContainerEl = controlPanelEl.querySelector("#mutation-container");
-const selectionCountEl = mutationContainerEl.querySelector("#mutation-selection-count-indicator");
+const selectionCountEl = controlPanelEl.querySelector("#mutation-selection-count-indicator");
 const searchEl = controlPanelEl.querySelector("#search");
 const frameEl = document.querySelector("#rs-iframe");
 console.assert(
