@@ -31,6 +31,12 @@ console.assert(
     frameEl
 );
 
+// Verify that all mutation ids are unique.
+{
+    const muts = Object.values(mutations);
+    muts.forEach(m=>console.assert(muts.filter(m2=>m2 !== m).every(m2=>m2.id !== m.id), `Non-unique mutation id: ${m.id}.`));
+}
+
 // Build the UI's list of available mutations.
 for (const [title, mutation] of Object.entries(mutations).sort()) {
     console.assert(
@@ -72,8 +78,6 @@ for (const [title, mutation] of Object.entries(mutations).sort()) {
         const allMutationEls = Array.from(mutationContainerEl.querySelectorAll("input[type='checkbox']"));
         const urlParamData = new URLSearchParams(window.location.search).get("mutations");
         const persistentData = (localStorage.getItem("rs:mutation-selection") || "");
-
-        console.log(persistentData)
 
         if (urlParamData !== null) {
             const mutationIds = urlParamData.split("$");
