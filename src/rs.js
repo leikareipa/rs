@@ -14,7 +14,7 @@ console.assert = function(condition, errorMessage = "") {
 }
 
 const controlPanelEl = document.querySelector("#control-panel");
-const controlPanelCloserEl = controlPanelEl.querySelector("#closer");
+const controlPanelCloserEl = document.querySelector("#control-panel-closer");
 const aboutEl = controlPanelEl.querySelector("#about");
 const dismissAboutEl = aboutEl.querySelector(".close.button");
 const mutationContainerEl = controlPanelEl.querySelector("#mutation-container");
@@ -150,6 +150,7 @@ function update_mutation_selection_count_label(numMutationsSelected = 0) {
 
 function toggle_control_panel_expansion() {
     controlPanelEl.classList.toggle("expanded");
+    controlPanelCloserEl.classList.toggle("active");
     frameEl.focus();
 }
 
