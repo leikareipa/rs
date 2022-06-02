@@ -62,14 +62,15 @@ for (const [title, mutation] of Object.entries(mutations).sort()) {
     {
         const allMutationEls = Array.from(mutationContainerEl.querySelectorAll("input[type='checkbox']"));
         const urlParamData = new URLSearchParams(window.location.search).get("mutations");
-        const persistentSelection = localStorage.getItem("rs:mutation-selection").split(",");
+        const persistentData = localStorage.getItem("rs:mutation-selection");
 
         if (urlParamData !== null) {
             const mutationIds = urlParamData.split("$");
             allMutationEls.filter(el=>mutationIds.includes(el.dataset.mutationId)).forEach(el=>{el.checked = true; el.onchange()});
         }
-        else if (persistentSelection.length) {
-            allMutationEls.filter(el=>persistentSelection.includes(el.dataset.mutationId)).forEach(el=>{el.checked = true; el.onchange()});
+        else if (persistentData !== null) {
+            const persistedIds = persistentData.split(",")
+            allMutationEls.filter(el=>persistedIds.includes(el.dataset.mutationId)).forEach(el=>{el.checked = true; el.onchange()});
         }
         // Otherwise, load the default, unmodified game.
         else {
