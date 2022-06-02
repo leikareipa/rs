@@ -71,13 +71,15 @@ for (const [title, mutation] of Object.entries(mutations).sort()) {
     {
         const allMutationEls = Array.from(mutationContainerEl.querySelectorAll("input[type='checkbox']"));
         const urlParamData = new URLSearchParams(window.location.search).get("mutations");
-        const persistentData = localStorage.getItem("rs:mutation-selection");
+        const persistentData = (localStorage.getItem("rs:mutation-selection") || "");
+
+        console.log(persistentData)
 
         if (urlParamData !== null) {
             const mutationIds = urlParamData.split("$");
             allMutationEls.filter(el=>mutationIds.includes(el.dataset.mutationId)).forEach(el=>{el.checked = true; el.onchange()});
         }
-        else if (persistentData !== null) {
+        else if (persistentData.length) {
             const persistedIds = persistentData.split(",")
             allMutationEls.filter(el=>persistedIds.includes(el.dataset.mutationId)).forEach(el=>{el.checked = true; el.onchange()});
         }
@@ -91,13 +93,15 @@ for (const [title, mutation] of Object.entries(mutations).sort()) {
 // Gets called when a mutation's checkbox in the UI is toggled.
 function on_mutation_selection_changed() {
     const selectedMutations = Array.from(mutationContainerEl.querySelectorAll("input[type='checkbox']:checked"));
-    const selectedMutationsIdList = selectedMutations.map(el=>el.dataset.mutationId);
+    const selectedIdsList = selectedMutations.map(el=>el.dataset.mutationId);
+    const selectedIdsString = selectedIdsList.join(",");
     const mutationRunCommands = selectedMutations.map(m=>m.value).join(",");
+
     debounced_update_rs_iframe_src(get_rs_dosbox_url(mutationRunCommands));
     update_mutation_selection_count_label(selectedMutations.length);
-    localStorage.setItem("rs:mutation-selection", selectedMutationsIdList.join(","));
-    window.history.replaceState(null, null, (selectedMutationsIdList.length? `?mutations=${selectedMutationsIdList.join("$")}` : "/"));
-
+    
+    localStorage[selectedIdsString.length? "setItem" : "removeItem"]("rs:mutation-selection", selectedIdsString);
+    window.history.replaceState(null, null, (selectedIdsList.length? `?mutations=${selectedIdsList.join("$")}` : "/"));
 }
 
 // Returns a URL to a ths-web-dosbox (cf. github.com/leikareipa/ths-web-dosbox)
