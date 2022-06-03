@@ -76,10 +76,10 @@ for (const [title, mutation] of Object.entries(mutations).sort()) {
     // persistent local storage, if either one is available.
     {
         const allMutationEls = Array.from(mutationContainerEl.querySelectorAll("input[type='checkbox']"));
-        const urlParamData = new URLSearchParams(window.location.search).get("mutations");
-        const persistentData = (localStorage.getItem("rs:mutation-selection") || "");
+        const urlParamData = (new URLSearchParams(window.location.search).get("mutations") || "").trim();
+        const persistentData = (localStorage.getItem("rs:mutation-selection") || "").trim();
 
-        if (urlParamData !== null) {
+        if (urlParamData.length) {
             const mutationIds = urlParamData.split("$");
             allMutationEls.filter(el=>mutationIds.includes(el.dataset.mutationId)).forEach(el=>{el.checked = true; el.onchange()});
         }
