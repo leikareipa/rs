@@ -86,7 +86,8 @@ a:hover {
     border-left: 1px solid gray;
 }
 
-#control-panel-closer:hover {
+#control-panel-closer:hover,
+#control-panel-closer.active {
     color: dimgray;
 }
 
@@ -128,7 +129,6 @@ a:hover {
     border-top: 1px solid var(--border-color);
     border-bottom: 1px solid var(--border-color);
     padding: 10px 10px;
-    padding-bottom: 20px;
 }
 
 #control-panel #mutation-container.empty::after {
