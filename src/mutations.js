@@ -631,4 +631,13 @@ export default {
         author: "Tarpeeksi Hyvae Soft",
         id: "918b826ca005",
     },
+
+    "Solid-colored 3D object textures": {
+        payload: [
+            "byte rallye.exe 22296 0",
+            "byte rallye.exe 22286 0",
+        ],
+        author: "Tarpeeksi Hyvae Soft",
+        id: "ba89a2514ee1",
+    },
 }
