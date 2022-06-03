@@ -9,6 +9,9 @@ Paraphrasing the idea of game corruptions from [corrupt.wiki](https://corrupt.wi
 ![](./screenshots/monochrome.png)\
 *Monochrome racing.*
 
+![](./screenshots/solid.png)\
+*Solid-colored landscapes with flat cars.*
+
 ## Usage
 
 You can access the app live on the web at [tarpeeksihyvaesoft.com/rs](https://tarpeeksihyvaesoft.com/rs).
