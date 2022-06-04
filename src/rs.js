@@ -38,10 +38,15 @@ console.assert(
     frameEl
 );
 
-// Verify that all mutation ids are unique.
+// Inspect the provided mutations' ids to make sure they're within valid bounds.
 {
     const muts = Object.values(mutations);
+
+    console.assert(muts.every(m=>(typeof m.id === "string")), "All mutation ids must be string.");
+
     muts.forEach(m=>console.assert(muts.filter(m2=>m2 !== m).every(m2=>m2.id !== m.id), `Non-unique mutation id: ${m.id}.`));
+
+    console.assert(!muts.some(m=>m.id.includes(mutationIdSeparator)), `A mutation id contains the illegal substring/character "${mutationIdSeparator}".`);
 }
 
 // Build the UI's list of available mutations.
