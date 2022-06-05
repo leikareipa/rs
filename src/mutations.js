@@ -49,8 +49,7 @@ export default {
 
     "Invisible cars": {
         payload: [
-            // These offsets are scalars in a routine to scale car meshes. We're setting
-            // them to a larger-than-default value.
+            // These offsets are scalars in a routine to scale car meshes.
             "byte rallye.exe 28889 0",
             "byte rallye.exe 28943 0",
             "byte rallye.exe 28988 0",
