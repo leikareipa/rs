@@ -100,11 +100,11 @@ a:hover {
     padding: 20px 15px;
     padding-left: 10px;
     display: flex;
-    font-size: var(--small-text-size);
 }
 
 #control-panel #about .button.close {
     margin-right: 1ch;
+    padding: 0.5em;
 }
 
 #control-panel .mutation {
